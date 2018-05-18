@@ -14,8 +14,12 @@ class Application
      */
     public function show(): string
     {
-        return include_once __DIR__ .
+        ob_start();
+
+        include_once __DIR__ .
             DIRECTORY_SEPARATOR . 'Views' .
             DIRECTORY_SEPARATOR . 'index.phtml';
+
+        return ob_get_clean();
     }
 }
