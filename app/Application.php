@@ -12,7 +12,7 @@ class Application extends Time implements KpiInterface
     /**
      * @var int
      */
-    private $percent = 20;
+    private $percent;
 
     /**
      * @var bool
@@ -41,12 +41,14 @@ class Application extends Time implements KpiInterface
 
         if (isset($_GET['percent'])) {
             $this->percent = (int)$_GET['percent'];
+        } else {
+            $this->percent = $_SERVER['DEFAULT_PERCENT'] ?? 20;
+        }
 
-            if ($this->percent < 0) {
-                $this->percent = 0;
-            } elseif ($this->percent > 100) {
-                $this->percent = 100;
-            }
+        if ($this->percent < 0) {
+            $this->percent = 0;
+        } elseif ($this->percent > 100) {
+            $this->percent = 100;
         }
 
         if ($this->hours || $this->minutes) {
